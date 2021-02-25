@@ -135,6 +135,39 @@
         }
       }
     },
+    "angular-forms": {
+      "projectType": "application",
+      "root": "projects/angular-forms",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "../proxy/public/angular11/angular-forms",
+            "index": "projects/index.html",
+            "main": "projects/main.ts",
+            "tsConfig": "projects/tsconfig.app.json",
+            "aot": true,
+            "customWebpackConfig": {
+              "path": "projects/angular-forms/extra-webpack.config.js",
+              "libraryName": "angular-forms",
+              "libraryTarget": "system"
+            }
+          },
+          "configurations": {
+            "production": {
+              "index": "",
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        }
+      }
+    },
     "single-spa-angular": {
       "projectType": "application",
       "root": "projects/single-spa-angular",
