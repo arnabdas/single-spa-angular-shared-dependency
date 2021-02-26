@@ -5,7 +5,6 @@ module.exports = (config, options) => {
   const singleSpaWebpackConfig = singleSpaAngularWebpack(config, options);
 
   singleSpaWebpackConfig.plugins.push(new SystemJSPublicPathWebpackPlugin({
-    // ONLY NEEDED FOR WEBPACK 1-4. Not necessary for webpack@5
     systemjsModuleName: "app11_m"
   }));
 
@@ -14,7 +13,24 @@ module.exports = (config, options) => {
     'rxjs/operators',
     'single-spa',
     'single-spa-angular',
-    /^@angular\/.*/,
+    '@angular/common',
+    '@angular/core',
+    '@angular/platform-browser',
+    '@angular/router',
+    // '@angular/forms',
+    '@angular/animations',
+    '@angular/animations/browser',
+    // '@angular/platform-browser/animations',
+    '@angular/material',
+    // '@angular/material/core',
+    // '@angular/material/slider',
+    '@angular/cdk',
+    '@angular/cdk/observers',
+    '@angular/cdk/platform',
+    '@angular/cdk/a11y',
+    // '@angular/cdk/bidi',
+    '@angular/cdk/coercion',
+    '@angular/cdk/keycodes'
   );
 
   return singleSpaWebpackConfig;
