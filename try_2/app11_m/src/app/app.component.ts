@@ -1,7 +1,7 @@
 import { Component, VERSION } from '@angular/core';
 
 @Component({
-  selector: 'app11-root',
+  selector: 'app11_m-root',
   template: `
     <div class="root">
       <h1>{{title}}</h1>
