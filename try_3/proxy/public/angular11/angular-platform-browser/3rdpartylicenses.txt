@@ -1,0 +1,5 @@
+@angular/animations
+MIT
+
+@angular/platform-browser
+MIT

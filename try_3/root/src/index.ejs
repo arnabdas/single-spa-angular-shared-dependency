@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Voila Micro-Frontends</title>
+
+  <!--
+    Remove this if you only support browsers that support async/await.
+    This is needed by babel to share largeish helper code for compiling async/await in older
+    browsers. More information at https://github.com/single-spa/create-single-spa/issues/112
+  -->
+  <script src="//localhost:3000/cdn/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+
+  <!--
+    This CSP allows any SSL-enabled host and for arbitrary eval(), but you should limit these directives further to increase your app's security.
+    Learn more about CSP policies at https://content-security-policy.com/#directive
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
+  <meta name="importmap-type" content="systemjs-importmap" />
+  <!-- If you wish to turn off import-map-overrides for specific environments (prod), uncomment the line below -->
+  <!-- More info at https://github.com/joeldenning/import-map-overrides/blob/master/docs/configuration.md#domain-list -->
+  <!-- <meta name="import-map-overrides-domains" content="denylist:prod.example.com" /> -->
+
+  <!-- Shared dependencies go into this import map. Your shared dependencies must be of one of the following formats:
+
+    1. System.register (preferred when possible) - https://github.com/systemjs/systemjs/blob/master/docs/system-register.md
+    2. UMD - https://github.com/umdjs/umd
+    3. Global variable
+
+    More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
+  -->
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "rxjs": "//localhost:3000/cdn/npm/@esm-bundle/rxjs@6.6.3-fix.0/system/es2015/rxjs.min.js",
+        "rxjs/operators": "//localhost:3000/cdn/npm/@esm-bundle/rxjs@6.6.3-fix.0/system/es2015/rxjs-operators.min.js",
+        "single-spa": "//localhost:3000/cdn/npm/single-spa@5.5.5/lib/system/single-spa.min.js",
+        "single-spa-angular": "//localhost:3000/public/angular11/single-spa-angular/single-spa-angular.js",
+        "tslib": "//localhost:3000/cdn/npm/tslib@2.0.3/tslib.min.js",
+
+        "@angular/common": "//localhost:3000/public/angular11/angular-common/angular_common.js",
+        "@angular/core": "//localhost:3000/public/angular11/angular-core/angular_core.js",
+        "@angular/platform-browser": "//localhost:3000/public/angular11/angular-platform-browser/angular_platform-browser.js",
+        "@angular/router": "//localhost:3000/public/angular11/angular-router/angular_router.js",
+
+        "@angular/forms": "//localhost:3000/public/angular11/angular-forms/angular_forms.js",
+
+        "@angular/animations": "//localhost:3000/public/angular11/angular-animations/animations.umd.min.js",
+        "@angular/animations/browser": "//localhost:3000/public/angular11/angular-animations/animations-browser.umd.min.js",
+
+        "@angular/platform-browser/animations": "//localhost:3000/public/angular11/angular-platform-browser/angular_platform-browser-animations.js",
+
+        "@angular/material": "//localhost:3000/public/angular11/angular-material/material.umd.min.js",
+        "@angular/material/core": "//localhost:3000/public/angular11/angular-material/material-core.umd.min.js",
+        "@angular/material/slider": "//localhost:3000/public/angular11/angular-material/material-slider.umd.min.js",
+
+        "@angular/cdk": "//localhost:3000/public/angular11/angular-cdk/cdk.umd.min.js",
+        "@angular/cdk/observers": "//localhost:3000/public/angular11/angular-cdk/cdk-observers.umd.min.js",
+        "@angular/cdk/platform": "//localhost:3000/public/angular11/angular-cdk/cdk-platform.umd.min.js",
+        "@angular/cdk/a11y": "//localhost:3000/public/angular11/angular-cdk/cdk-a11y.umd.min.js",
+        "@angular/cdk/bidi": "//localhost:3000/public/angular11/angular-cdk/cdk-bidi.umd.min.js",
+        "@angular/cdk/coercion": "//localhost:3000/public/angular11/angular-cdk/cdk-coercion.umd.min.js",
+        "@angular/cdk/keycodes": "//localhost:3000/public/angular11/angular-cdk/cdk-keycodes.umd.min.js"
+      }
+    }
+  </script>
+  <link rel="preload" href="//localhost:3000/cdn/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
+
+  <!-- Add your organization's prod import map URL to this script's src  -->
+  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+
+  <% if (isLocal) { %>
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
+        "app11": "//localhost:4200/main.js",
+        "app11_1": "//localhost:4201/main.js",
+        "app11_m": "//localhost:4202/main.js",
+        "@singtel/root-config": "//localhost:9000/singtel-root-config.js"
+      }
+    }
+  </script>
+  <% } %>
+
+  <!--
+    If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
+    Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
+  -->
+  <script src="//localhost:3000/cdn/npm/zone.js@0.11.3/dist/zone.min.js"></script>
+
+  <script src="//localhost:3000/cdn/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+  <script src="//localhost:3000/cdn/npm/systemjs@6.8.3/dist/system.js"></script>
+  <script src="//localhost:3000/cdn/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+  <script src="//localhost:3000/cdn/npm/systemjs@6.8.3/dist/extras/named-exports.min.js"></script>
+
+  <template id="single-spa-layout">
+    <single-spa-router>
+      <!-- <nav>
+        <application name="@<%- orgName %>/navbar"></application>
+      </nav> -->
+      <main>
+        <route default>
+          <application name="@single-spa/welcome"></application>
+        </route>
+        <route path="app11">
+          <application name="app11"></application>
+        </route>
+        <route path="app11_1">
+          <application name="app11_1"></application>
+        </route>
+        <route path="app11_m">
+          <application name="app11_m"></application>
+        </route>
+      </main>
+    </single-spa-router>
+  </template>
+</head>
+<body>
+  <script>
+    System.import('@singtel/root-config');
+  </script>
+  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
+</html>
