@@ -127,5 +127,16 @@
     System.import('@singtel/root-config');
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+
+  <div id="voila-loader" style="position: absolute;
+  right: 10px;
+  bottom: 10px;
+  height: 150px;
+  width: 150px;
+  padding: 10px;
+  display: none;
+  background-color: antiquewhite;">Loader</div>
+
+  <script src="//localhost:3000/public/shared-worker/initiate-loader.js"></script>
 </body>
 </html>
